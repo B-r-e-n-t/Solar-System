@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      background-color: black;
+    }
+    #sun {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 400px;
+    }
+
+    .planet {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+    }
+  </style>
+</head>
+<body>
+  <img id="sun" src="sun.jpg" alt="Sun">
+
+  <script>
+    // Function to create a planet
+    function createPlanet(radius, orbitRadius, speed, imagePath) {
+      var planet = document.createElement('img');
+      planet.className = 'planet';
+      planet.src = imagePath;
+      document.body.appendChild(planet);
+
+      var angle = 0;
+      var x, y;
+
+      function updatePosition() {
+        var centerX = window.innerWidth / 2;
+        var centerY = window.innerHeight / 2;
+
+        x = centerX + orbitRadius * Math.cos(angle);
+        y = centerY + orbitRadius * Math.sin(angle);
+
+        planet.style.left = x - planet.width / 2 + 'px';
+        planet.style.top = y - planet.height / 2 + 'px';
+
+        angle += speed;
+        requestAnimationFrame(updatePosition);
+      }
+
+      updatePosition();
+    }
+
+    // Create the planets
+    createPlanet(5, 150, 0.01, 'mercury.png'); // Mercury
+    createPlanet(10, 200, 0.008, 'venus.png'); // Venus
+    createPlanet(12, 250, 0.005, 'earth.png'); // Earth
+    createPlanet(8, 300, 0.004, 'mars.png'); // Mars
+    createPlanet(20, 350, 0.002, 'jupiter.png'); // Jupiter
+    createPlanet(18, 400, 0.001, 'saturn.png'); // Saturn
+    createPlanet(15, 450, 0.0008, 'uranus.png'); // Uranus
+    createPlanet(14, 500, 0.0005, 'neptune.png'); // Neptune
+
+  </script>
+</body>
+</html>
